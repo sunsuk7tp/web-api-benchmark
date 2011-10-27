@@ -1,0 +1,5 @@
+web-api-benchmark: YCSB-like web benchmark tool.
+
+You can use this benchmark tool for benchmarking apis which you provide.
+This tool is inspired by Yahoo! Cloud Serving Benchmark (YCSB).
+As with YCSB, you enable to register workloads and the definitions of your apis.
