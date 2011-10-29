@@ -4,13 +4,13 @@ import java.util.Properties;
 import java.util.Vector;
 
 import benchmark.api.Operations;
-import benchmark.api.impl.SimpleInstance;
-import benchmark.api.impl.SimpleOperations;
+import benchmark.api.impl.SimpleAPIInstance;
+import benchmark.api.impl.SimpleAPIOperations;
 import benchmark.thread.BenchmarkThread;
 import benchmark.thread.LoadThread;
 import benchmark.thread.OperationThread;
 
-public class SimpleBenchmark extends Benchmark {
+public class SimpleAPIBenchmark extends Benchmark {
 	public static void main(String[] args) {
 		// set parameters for input arguments
 		Properties props = parseArgs(args);
@@ -27,7 +27,7 @@ public class SimpleBenchmark extends Benchmark {
 
 		// create benchmark threads
 		Vector<BenchmarkThread> threads = new Vector<BenchmarkThread>();
-		Operations<SimpleInstance, Long, String, String> operations = new SimpleOperations(props);
+		Operations<SimpleAPIInstance, Long, String, String> operations = new SimpleAPIOperations(props);
 		if (isBench()) {
 			for (int threadId = 0; threadId < threadcount; threadId++) {
 				threads.add(new OperationThread(operations, threadId, threadcount, opcount));

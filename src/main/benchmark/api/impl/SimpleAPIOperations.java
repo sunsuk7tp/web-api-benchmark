@@ -11,7 +11,7 @@ import benchmark.generator.MersenneTwister;
 import benchmark.generator.Utils;
 import benchmark.generator.ZipfRandom;
 
-public class SimpleOperations implements Operations<SimpleInstance, Long, String, String>{
+public class SimpleAPIOperations implements Operations<SimpleAPIInstance, Long, String, String>{
 	BenchmarkInstance<SimpleAPI, Long, String, String> instance;
 	final static int DELETE = 4;
 	final static String NAME_DELETE = "DELETE";
@@ -31,9 +31,9 @@ public class SimpleOperations implements Operations<SimpleInstance, Long, String
 
 	Properties props;
 
-	public SimpleOperations(Properties props) {
+	public SimpleAPIOperations(Properties props) {
 		this.props = props;
-		this.instance = new SimpleInstance();
+		this.instance = new SimpleAPIInstance();
 		int loadedSize = Integer.parseInt(props.getProperty("loadcount", DEFAULT_LOADED_RECORDSIZE));
 		valueLen = Integer.parseInt(props.getProperty("valuelen", DEFAULT_VALUE_LENGTH));
 

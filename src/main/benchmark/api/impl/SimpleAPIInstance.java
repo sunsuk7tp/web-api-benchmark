@@ -2,7 +2,7 @@ package benchmark.api.impl;
 
 import benchmark.api.BenchmarkInstance;
 
-public class SimpleInstance implements BenchmarkInstance<SimpleAPI, Long, String, String> {
+public class SimpleAPIInstance implements BenchmarkInstance<SimpleAPI, Long, String, String> {
 
 	SimpleAPI simpleAPI;
 
