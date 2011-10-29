@@ -1,6 +1,6 @@
-package api;
+package benchmark.api.impl;
 
-import benchmark.BenchmarkInstance;
+import benchmark.api.BenchmarkInstance;
 
 public class SimpleInstance implements BenchmarkInstance<SimpleAPI, Long, String, String> {
 

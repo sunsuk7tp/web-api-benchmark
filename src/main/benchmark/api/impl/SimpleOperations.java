@@ -1,12 +1,12 @@
-package api;
+package benchmark.api.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import benchmark.BenchmarkInstance;
-import benchmark.Operations;
+import benchmark.api.BenchmarkInstance;
+import benchmark.api.Operations;
 import benchmark.generator.MersenneTwister;
 import benchmark.generator.Utils;
 import benchmark.generator.ZipfRandom;

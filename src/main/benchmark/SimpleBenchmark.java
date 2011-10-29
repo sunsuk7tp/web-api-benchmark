@@ -3,8 +3,9 @@ package benchmark;
 import java.util.Properties;
 import java.util.Vector;
 
-import api.SimpleInstance;
-import api.SimpleOperations;
+import benchmark.api.Operations;
+import benchmark.api.impl.SimpleInstance;
+import benchmark.api.impl.SimpleOperations;
 import benchmark.thread.BenchmarkThread;
 import benchmark.thread.LoadThread;
 import benchmark.thread.OperationThread;

@@ -1,6 +1,6 @@
 package benchmark.thread;
 
-import benchmark.Operations;
+import benchmark.api.Operations;
 
 public class LoadThread extends BenchmarkThread {
 	long loadedsize;

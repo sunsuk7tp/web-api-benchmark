@@ -1,4 +1,4 @@
-package benchmark;
+package benchmark.api;
 
 public interface BenchmarkInstance<S, K, V, U> {
 	void setInstance();

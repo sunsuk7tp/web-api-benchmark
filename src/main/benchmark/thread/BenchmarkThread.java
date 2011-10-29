@@ -1,6 +1,6 @@
 package benchmark.thread;
 
-import benchmark.Operations;
+import benchmark.api.Operations;
 
 public abstract class BenchmarkThread extends Thread {
 	Operations<?, ?, ?, ?> operations;
