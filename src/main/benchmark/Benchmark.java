@@ -18,10 +18,6 @@ public abstract class Benchmark {
 	private static boolean isBench = true;
 	private static boolean status = false;
 
-	// default size
-	public final static String DEFAULT_THREADSIZE = "1";
-	public final static String DEFAULT_OPERATIONSIZE = "1";
-
 	public static void usageMessage() {
 		System.out.println("Usage: java **Benchmark [options]");
 		System.out.println("Options:");

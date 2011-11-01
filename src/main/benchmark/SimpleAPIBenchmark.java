@@ -7,38 +7,19 @@ import benchmark.api.Operations;
 import benchmark.api.impl.SimpleAPIInstance;
 import benchmark.api.impl.SimpleAPIOperations;
 import benchmark.thread.BenchmarkThread;
-import benchmark.thread.LoadThread;
-import benchmark.thread.OperationThread;
+import benchmark.thread.ThreadCreator;
 
 public class SimpleAPIBenchmark extends Benchmark {
 	public static void main(String[] args) {
 		// set parameters for input arguments
 		Properties props = parseArgs(args);
 		// create benchmark threads
-		Vector<BenchmarkThread> threads = createBenchThreads(props);
+		boolean isBench = isBench();
+		Operations<SimpleAPIInstance, Long, String, String> operations = new SimpleAPIOperations(props);
+		ThreadCreator<SimpleAPIInstance, Long, String, String> tc =
+				new ThreadCreator<SimpleAPIInstance, Long, String, String>(isBench, props, operations);
+		Vector<BenchmarkThread> threads = tc.create();
 		// benchmark run
 		run(threads, props);
-	}
-
-	public static Vector<BenchmarkThread> createBenchThreads(Properties props) {
-		// get number of threads, opcount per a thread
-		int threadcount = Integer.parseInt(props.getProperty("threadcount", DEFAULT_THREADSIZE));
-		int opcount = Integer.parseInt(props.getProperty("operationcount", DEFAULT_OPERATIONSIZE)) / threadcount;
-
-		// create benchmark threads
-		Vector<BenchmarkThread> threads = new Vector<BenchmarkThread>();
-		Operations<SimpleAPIInstance, Long, String, String> operations = new SimpleAPIOperations(props);
-		if (isBench()) {
-			for (int threadId = 0; threadId < threadcount; threadId++) {
-				threads.add(new OperationThread(operations, threadId, threadcount, opcount));
-			}
-		} else {
-			operations.setLoadedData(opcount);
-			for (int threadId = 0; threadId < threadcount; threadId++) {
-				threads.add(new LoadThread(operations, threadId, threadcount, opcount));
-			}
-		}
-
-		return threads;
 	}
 }
