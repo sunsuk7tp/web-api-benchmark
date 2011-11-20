@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import benchmark.api.BenchmarkInstance;
-import benchmark.api.Operations;
-import benchmark.generator.MersenneTwister;
+import benchmark.api.*;
+import benchmark.generator.IntegerGenerator;
+import benchmark.generator.UniformIntegerGenerator;
 import benchmark.generator.Utils;
-import benchmark.generator.ZipfRandom;
+import benchmark.generator.ZipfianGenerator;
 
 public class SimpleAPIOperations implements Operations<SimpleAPIInstance, Long, String, String>{
 	BenchmarkInstance<SimpleAPI, Long, String, String> instance;
@@ -25,7 +25,7 @@ public class SimpleAPIOperations implements Operations<SimpleAPIInstance, Long, 
 	private final static String DEFAULT_VALUE_LENGTH = "8";
 
 	List<String> data;
-	ZipfRandom zipfRnd;
+	IntegerGenerator rndKey;
 	int valueLen;
 	long loaded_recordsize;
 
@@ -37,7 +37,14 @@ public class SimpleAPIOperations implements Operations<SimpleAPIInstance, Long, 
 		int loadedSize = Integer.parseInt(props.getProperty("loadcount", DEFAULT_LOADED_RECORDSIZE));
 		valueLen = Integer.parseInt(props.getProperty("valuelen", DEFAULT_VALUE_LENGTH));
 
-		zipfRnd = new ZipfRandom(loadedSize, 1.0, new MersenneTwister());
+		String dist = props.getProperty("distribution", DEFAULT_DISTRIBUTION);
+		if (dist.equals("zipfian")) {
+			rndKey = new ZipfianGenerator(0, loadedSize);
+		} else if (dist.equals("uniform")) {
+			rndKey = new UniformIntegerGenerator(0, loadedSize);
+		} else {
+			rndKey = new ZipfianGenerator(0, loadedSize);
+		}
 
 		setOperationRatio();
 	}
@@ -116,7 +123,7 @@ public class SimpleAPIOperations implements Operations<SimpleAPIInstance, Long, 
 	public Long getKeyId() {
 		long keyId = 0;
 		while (keyId <= 0) {
-			keyId = zipfRnd.getNext();
+			keyId = rndKey.nextInt();
 		}
 		return keyId;
 	}

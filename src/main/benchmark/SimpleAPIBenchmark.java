@@ -10,6 +10,7 @@ import benchmark.thread.BenchmarkThread;
 import benchmark.thread.ThreadCreator;
 
 public class SimpleAPIBenchmark extends Benchmark {
+
 	public static void main(String[] args) {
 		// set parameters for input arguments
 		Properties props = parseArgs(args);

@@ -13,6 +13,7 @@ public interface Operations<S, K, V, U> {
 	final static String NAME_UPDATE = "UPDATE";
 
 	final static String DEFAULT_LOADED_RECORDSIZE = "10000";
+	final static String DEFAULT_DISTRIBUTION = "zipfian";
 
 	Random rnd = new Random();
 	Measurements measurements = Measurements.getMeasurements();

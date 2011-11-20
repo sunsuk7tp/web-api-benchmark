@@ -26,6 +26,7 @@ public abstract class Benchmark {
 		System.out.println("  -load:  run the loading phase of the workload");
 		System.out.println("  -ops n:  n operations (default: 1)");
 		System.out.println("  -loads n:  n loaded records (default: 10000)");
+		System.out.println("  -dist <distribution>: selected key distribution (default: zipfian)");
 		System.out.println("  -valuelen:  value length (default: 8)");
 		System.out.println("  -s:  show status during run (default: no status)");
 		System.out.println(" -<OP> ratio: specify execution ratio[%] for <OP>");
@@ -72,6 +73,14 @@ public abstract class Benchmark {
 					System.exit(0);
 				}
 				props.setProperty("loadcount", Integer.parseInt(args[argindex]) + "");
+				argindex++;
+			} else if (args[argindex].compareTo("-dist") == 0) {
+				argindex++;
+				if (argindex >= args.length) {
+					usageMessage();
+					System.exit(0);
+				}
+				props.setProperty("distribution", args[argindex]);
 				argindex++;
 			} else if (args[argindex].compareTo("-s") == 0) {
 				onStatus();
@@ -170,7 +179,7 @@ public abstract class Benchmark {
 			}
 
 			exporter.write("OVERALL", "RunTime(ms)", runtime);
-			double throughput = 1000.0 * (double)opcount / (double)runtime;
+			double throughput = 1000.0 * opcount / runtime;
 			exporter.write("OVERALL", "Throughput(ops/sec)", throughput);
 
 			Measurements.getMeasurements().exportMeasurements(exporter);
